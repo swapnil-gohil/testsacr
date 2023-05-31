@@ -19,4 +19,4 @@ jobs:
         az acr run \
         --cmd "$PURGE_CMD" \
         --registry testsacr 
-        /dev/null
+        -f - /dev/null
