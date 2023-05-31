@@ -1,3 +1,2 @@
 # testsacr
 hello world
-hello
