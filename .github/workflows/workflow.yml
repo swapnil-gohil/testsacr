@@ -12,12 +12,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    - name: Enable access to ACR
-      shell: pwsh
-      run: |
-        chmod +x .github/scripts/enable_acr_access.ps1
-        .github/scripts/enable_acr_access.ps1
 
     - name: Set ACR Lifecycle Policy
       run: |
