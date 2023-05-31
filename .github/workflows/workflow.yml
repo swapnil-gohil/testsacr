@@ -16,7 +16,4 @@ jobs:
     - name: Set ACR Lifecycle Policy
       run: |
         az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        az acr run \
-        --cmd "$PURGE_CMD" \
-        --registry testsacr 
-        <SOURCE_LOCATION> /dev/null
+        az acr run --registry testsacr --cmd "$PURGE_CMD" /dev/null
