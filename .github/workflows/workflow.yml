@@ -15,9 +15,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Print Command Output
       run: |
-        if [ "${{ github.workflow }}" == "UAT" ]; then
+        if [ "${{ github.workflow_run.workflows }}" == "UAT" ]; then
           output=${{ secrets.UAT_OUTPUT }}
-        elif [ "${{ github.workflow }}" == "Production" ]; then
+        elif [ "${{ github.workflow_run.workflows }}" == "Production" ]; then
           output=${{ secrets.PRODUCTION_OUTPUT }}
         fi
         echo "Command Output: $output"
