@@ -1,9 +1,10 @@
 name: ACR Lifecycle Policy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Production", "UAT"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -12,8 +13,18 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Print Command Output
+      run: |
+        if [ "${{ github.workflow }}" == "UAT" ]; then
+          output=${{ secrets.UAT_OUTPUT }}
+        elif [ "${{ github.workflow }}" == "Production" ]; then
+          output=${{ secrets.PRODUCTION_OUTPUT }}
+        fi
+        echo "Command Output: $output"
+
 
     - name: Set ACR Lifecycle Policy
       run: |
+        echo "$output"
         az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
         az acr run --cmd "acr purge --filter 'prod-ww:.*' --keep 3 --ago 1m --untagged --dry-run" --registry testsacr /dev/null
