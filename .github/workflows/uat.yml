@@ -1,0 +1,13 @@
+name: UAT
+on:
+  push:
+    paths:
+      - 'uat/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
