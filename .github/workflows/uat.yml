@@ -11,3 +11,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    
+    - name: Call ACR Workflow
+      uses: ./.github/workflows/workflow.yml
+      with:
+        calling_workflow: 'UAT'
