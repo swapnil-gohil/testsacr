@@ -1,10 +1,9 @@
 name: ACR Lifecycle Policy
 
 on:
-  workflow_run:
-    workflows: ["Production", "UAT"]
-    types:
-      - completed
+  workflow_call:
+    inputs:
+      calling_workflow:
 
 jobs:
   deploy:
@@ -15,9 +14,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Print Command Output
       run: |
-        if [ "${{ github.workflow_run.workflows }}" == "UAT" ]; then
+        if [ "${{ github.event.workflow_call.inputs.calling_workflow }}" == "UAT" ]; then
           output=${{ secrets.UAT_OUTPUT }}
-        elif [ "${{ github.workflow_run.workflows }}" == "Production" ]; then
+        elif [ "${{ github.event.workflow_call.inputs.calling_workflow }}" == "Production" ]; then
           output=${{ secrets.PRODUCTION_OUTPUT }}
         fi
         echo "Command Output: $output"
