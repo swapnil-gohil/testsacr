@@ -16,6 +16,7 @@ jobs:
     - name: AZ login
       run: | 
         az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az acr login --name testsacr.azurecr.io
         
     - name: Enable access to ACR
       shell: pwsh
