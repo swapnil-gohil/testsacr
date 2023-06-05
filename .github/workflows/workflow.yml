@@ -1,5 +1,4 @@
 name: ACR Lifecycle Policy
-
 on:
   push:
     branches:
