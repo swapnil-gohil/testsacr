@@ -32,7 +32,4 @@ jobs:
 
     - name: Set ACR Lifecycle Policy
       run: |
-        private_endpoint_ip=${{ steps.get-private-endpoint.outputs.private_endpoint_ip }}
-        acr_run_cmd="az acr run --cmd \"acr purge --filter 'prod-ww:.*' --keep 3 --ago 1m --untagged --dry-run\" --registry testsacr.azurecr.io --set DOCKER_LOGIN_SERVER=${private_endpoint_ip}"
-        echo "Running ACR Lifecycle Policy with private endpoint: ${acr_run_cmd}"
-        $acr_run_cmd
+        az acr run --cmd "acr purge --filter 'prod-ww:.*' --keep 3 --ago 1m --untagged --dry-run" --registry testsacr.azurecr.io
