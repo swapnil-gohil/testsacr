@@ -32,4 +32,4 @@ jobs:
 
     - name: Set ACR Lifecycle Policy
       run: |
-        az acr run --cmd "acr purge --filter 'prod-ww:.*' --keep 3 --ago 1m --untagged --dry-run" --registry testsacr.azurecr.io
+        az acr run --cmd "acr purge --filter 'prod-ww:.*' --keep 3 --ago 1m --untagged --dry-run" --registry testsacr.azurecr.io /dev/null
