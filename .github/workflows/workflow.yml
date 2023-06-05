@@ -1,5 +1,4 @@
 name: ACR Lifecycle Policy
-
 on:
   push:
     branches:
@@ -24,11 +23,6 @@ jobs:
         chmod +x .github/scripts/enable_acr_access.ps1
         .github/scripts/enable_acr_access.ps1
 
-    - name: Get Private Endpoint IP
-      id: get-private-endpoint
-      run: |
-        endpoint_ip=$(az network private-endpoint show --name private-endpoint --resource-group new-rg --query "customDnsConfigs[0].ipAddresses[0]" -o tsv)
-        echo "::set-output name=private_endpoint_ip::$endpoint_ip"
 
     
 
